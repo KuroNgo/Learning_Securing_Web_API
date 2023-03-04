@@ -1,81 +1,100 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using WebAPI_Train4.Data;
 using WebAPI_Train4.Models;
+using WebAPI_Train4.Services;
 
 namespace WebAPI_Train4.Controllers
 {
+    // 5 API cơ bản
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private MyDbContext _context;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryController(MyDbContext myDbContext)
+        public CategoryController(ICategoryRepository categoryRepository)
         {
-            _context = myDbContext;
+            _categoryRepository = categoryRepository;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
-            var dsLoai = _context.categories.ToList();
-            return Ok(dsLoai);
+            try
+            {
+                return Ok(_categoryRepository.GetAll());
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [HttpGet("{id}")]
         public IActionResult GetByID(int id)
         {
-            var dsLoai = _context.categories.SingleOrDefault(loai =>
-            loai.MaLoai == id);
-            if (dsLoai != null)
-            {
-                return Ok(dsLoai);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
-
-        // Thêm 
-        [HttpPost]
-        public IActionResult CreateNew(CategoryModel categoryModel)
-        {
             try
             {
-                var loai = new Category
+                var data = _categoryRepository.GetByID(id);
+                if (data != null)
                 {
-                    TenLoai = categoryModel.TenLoai
-                };
-                _context.Add(loai);
-                _context.SaveChanges();
-                return Ok(loai);
+                    return Ok(data);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
             catch
             {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id,CategoryVM categoryVM)
+        {
+            if(id != categoryVM.MaLoai)
+            {
                 return BadRequest();
             }
-
+            try
+            {
+                _categoryRepository.Update(categoryVM);
+                return NoContent();//204
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
         }
 
-        //
-        [HttpPut("{id}")]
-        public IActionResult UpdateCategoryById(int id,CategoryModel categoryModel)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            var category = _context.categories.SingleOrDefault(category => category.MaLoai == id);
-            if(category != null)
+            try
             {
-                category.TenLoai=categoryModel.TenLoai;
-                _context.SaveChanges();
-                return NoContent();
-
+                _categoryRepository.Remove(id);
+                return Ok();
             }
-            else
+            catch 
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
+
+        [HttpPost]
+        public IActionResult Add(CategoryModel categoryModel)
+        {
+            try
+            {
+                return Ok(_categoryRepository.Add(categoryModel));
+            }
+            catch 
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
     }
 }
