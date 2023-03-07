@@ -50,7 +50,7 @@ namespace WebAPI_Train4.Controllers
 
         // Thêm 
         [HttpPost]
-        //[Authorize] 
+        [Authorize] 
         //401
         // Phải cấu hình mới thực hiện được lệnh authorized
         // Phải đăng nhập mới được làm
