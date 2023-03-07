@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
 using WebAPI_Train4.Data;
+using WebAPI_Train4.Models;
 using WebAPI_Train4.Services;
 
 namespace WebAPI_Train4
@@ -35,21 +36,26 @@ namespace WebAPI_Train4
 
             //services.AddScoped<ICategoryRepository, LoaiRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepositoryInMemory>();
-
-
+            services.Configure<AppSetting>(Configuration.GetSection("AppSettings"));
+            // Dùng để mã hóa JWT
+            // JWT dùng secretKey để sài
+            // Thuật toán mã hóa chỉ sử dụng trên bit cần phải convert về mảng byte
             var secretKey = Configuration["AppSettings:SecretKey"];
             var secretKeyBytes = Encoding.UTF8.GetBytes(secretKey);
 
+            // AddAuthentication
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {
-                opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                opt.TokenValidationParameters = new TokenValidationParameters
                 {
+                    
                     // Tự cấp token
                     ValidateIssuer = false,
                     ValidateAudience = false,
 
                     // Ký vào token
                     ValidateIssuerSigningKey = true,
+                    // Sử dụng thuật toán đối xứng ứng với cái Key, sẽ tự động mã hóa, về mặt mã hóa thì phải làm được trên bit thì phải encode lại
                     IssuerSigningKey = new SymmetricSecurityKey(secretKeyBytes),
 
                     ClockSkew = TimeSpan.Zero
@@ -74,7 +80,8 @@ namespace WebAPI_Train4
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            // Authentication phải đặt trước Authorization
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

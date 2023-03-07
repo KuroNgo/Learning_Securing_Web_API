@@ -11,6 +11,7 @@ namespace WebAPI_Train4.Data
 
         // MUốn map với database thì tạo DbSet
         #region DbSet
+        public DbSet<NguoiDung> NguoiDungs { get; set; }
         public DbSet<HangHoa> hangHoas { get; set; } 
         public DbSet<Category> categories { get; set; }
         #endregion
@@ -20,6 +21,7 @@ namespace WebAPI_Train4.Data
         // Định nghĩa Fluent API
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //Bien dich lenh add migration
             modelBuilder.Entity<DonHang>(e =>
             {
                 e.ToTable("DonHang");
@@ -33,6 +35,8 @@ namespace WebAPI_Train4.Data
                 .IsRequired()
                 .HasMaxLength(100);
             });
+
+            //Bien dich lenh add migration
             modelBuilder.Entity<DonHangChiTiet>(entity =>
             {
                 entity.ToTable("ChiTietDonHang");
@@ -47,6 +51,13 @@ namespace WebAPI_Train4.Data
                 .WithMany(e => e.DonHangChiTiet)
                 .HasForeignKey(e => e.MaHH)
                 .HasConstraintName("FK_DonHangChiTiet_HangHoa");
+            });
+            //Bien dich lenh add-migration
+            modelBuilder.Entity<NguoiDung>(entity =>
+            {
+                entity.HasIndex(e => e.UserName).IsUnique();
+                entity.Property(e => e.HoTen).IsRequired().HasMaxLength(150);
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(150);
             });
         }
     }
