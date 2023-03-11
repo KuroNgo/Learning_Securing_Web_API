@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>WebAPI_Train4</RootNamespace>
+    <Nullable>warnings</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
