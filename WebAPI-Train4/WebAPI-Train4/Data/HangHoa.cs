@@ -30,6 +30,7 @@ namespace WebAPI_Train4.Data
         public ICollection<DonHangChiTiet> DonHangChiTiet { get; set; }
         public HangHoa()
         {
+            //HashSet là tập hợp danh sách không cho phép trùng giá trị
             DonHangChiTiet=new HashSet<DonHangChiTiet>();
         }
     }

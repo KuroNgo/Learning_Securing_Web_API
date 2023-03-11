@@ -36,7 +36,9 @@ namespace WebAPI_Train4
 
             //services.AddScoped<ICategoryRepository, LoaiRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepositoryInMemory>();
+            services.AddScoped<IHangHoaRepository, HangHoaRepository>();
             services.Configure<AppSetting>(Configuration.GetSection("AppSettings"));
+           
             // Dùng để mã hóa JWT
             // JWT dùng secretKey để sài
             // Thuật toán mã hóa chỉ sử dụng trên bit cần phải convert về mảng byte
