@@ -15,7 +15,7 @@ namespace WebAPI_Train4.Data
         public DbSet<HangHoa> hangHoas { get; set; } 
         public DbSet<Category> categories { get; set; }
         #endregion
-        
+        public DbSet<RefreshToken> refreshTokens { get; set; }
         public DbSet<DonHangChiTiet> donHangChiTiets { get; set; }
         public DbSet<DonHang> donHangs { get; set; }
         // Định nghĩa Fluent API
