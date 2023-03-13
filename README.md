@@ -1,13 +1,13 @@
 # Quá trình học Securing Web API
 
-# Day 1: Học sử dụng Swagger và Entity Framework (Code First)
-# Day 2: 
-    * Học Fluent API trong Entity Framework Core 
-    * Controller Action Return Type & HTTP Status Code 
-    * Repository Pattern in ASP.NET Core Web API + Secure API with Json Web Token (JWT)
-# Day 3: Secure API with Json Web Token (JWT)
-    * Json Web Tonken (JWT) là gì?
-    * JSON Web Mã (JWT) là một chuẩn mở (RFC 7519) định nghĩa một cách nhỏ gọn và khép kín để truyền một cách an toàn thông tin giữa các bên dưới dạng đối tượng JSON. Thông tin này có thể được xác minh và đáng tin cậy vì nó có chứa chữ ký số. JWTs có thể được ký bằng một thuật toán bí mật (với thuật toán HMAC) hoặc một public / private key sử dụng mã hoá RSA.
+ #### Day 1: Học sử dụng Swagger và Entity Framework (Code First)
+ #### Day 2: 
+    Học Fluent API trong Entity Framework Core 
+    Controller Action Return Type & HTTP Status Code 
+    Repository Pattern in ASP.NET Core Web API + Secure API with Json Web Token (JWT)
+ #### Day 3: Secure API with Json Web Token (JWT)
+    Json Web Tonken (JWT) là gì?
+    JSON Web Mã (JWT) là một chuẩn mở (RFC 7519) định nghĩa một cách nhỏ gọn và khép kín để truyền một cách an toàn thông tin giữa các bên dưới dạng đối tượng JSON. Thông tin này có thể được xác minh và đáng tin cậy vì nó có chứa chữ ký số. JWTs có thể được ký bằng một thuật toán bí mật (với thuật toán HMAC) hoặc một public / private key sử dụng mã hoá RSA.
     * Cấu trúc: "< base64-encoded header > . < base64-encoded payload > . < base64-encoded signature >"
     * Nói một cách khác, JWT là sự kết hợp (bởi dấu .) một Object Header dưới định dạng JSON được encode base64, một payload object dưới định dạng JSOn được encode base64 và một Signature cho URI cũng được mã hóa base64 nốt.
     * So sánh giữa Authentication và Authorization
@@ -23,8 +23,8 @@
     * Authorization là quá trình để xác định xem người dùng được xác thực có quyền truy cập vào các tài nguyên cụ thể hay không. Nó xác minh quyền của bạn để cấp cho bạn quyền truy cập vào các tài nguyên như thông tin, cơ sở dữ liệu, file, v.v. Authorization thường được đưa ra sau khi xác thực xác nhận các đặc quyền của bạn để thực hiện. Nói một cách đơn giản hơn, nó giống như cho phép ai đó chính thức làm điều gì đó hoặc bất cứ điều gì.
     * Ví dụ, quy trình xác minh và xác nhận ID nhân viên và mật khẩu trong một tổ chức được gọi là authentication, nhưng xác định nhân viên nào có quyền truy cập vào tầng nào được gọi là authorization. Hãy nói với bạn rằng bạn đang đi du lịch và bạn sẽ lên một chuyến bay. Khi bạn xuất trình vé và một số giấy tờ tùy thân trước khi nhận phòng, bạn sẽ nhận được thẻ lên máy bay xác nhận rằng cơ quan sân bay đã xác thực danh tính của bạn. Nhưng đó không phải là nó. Một tiếp viên hàng không phải ủy quyền cho bạn lên chuyến bay mà bạn được cho là đang bay, cho phép bạn truy cập vào bên trong máy bay và các tài nguyên của nó.
     * Truy cập vào một hệ thống được bảo vệ bởi cả authentication và authorization. Mọi nỗ lực truy cập hệ thống có thể được xác thực bằng cách nhập thông tin xác thực, nhưng chỉ có thể được chấp nhận sau khi ủy quyền thành công. Nếu nỗ lực được xác thực nhưng không được phép, hệ thống sẽ từ chối quyền truy cập vào hệ thống.
-   ## Authentication	Authorization
-   ### Authentication 
+   ##### Authentication	Authorization
+   ##### Authentication 
       * xác nhận danh tính của bạn để cấp quyền truy cập vào hệ thống.	
       * Authorization xác định xem bạn có được phép truy cập tài nguyên không.
       * Đây là quá trình xác nhận thông tin đăng nhập để có quyền truy cập của người dùng.	
@@ -34,11 +34,13 @@
       * Authentication thường yêu cầu tên người dùng và mật khẩu.	
       * Các yếu tố xác thực cần thiết để authorization có thể khác nhau, tùy thuộc vào mức độ bảo mật.
       * Authentication là bước đầu tiên của authorization vì vậy luôn luôn đến trước.	
-   ### Authorization
+   ##### Authorization
       *  Authorization được thực hiện sau khi authentication thành công.
       * Ví dụ, sinh viên của một trường đại học cụ thể được yêu cầu tự xác thực trước khi truy cập vào liên kết sinh viên của trang web chính thức của trường đại học. Điều này được gọi là authentication.	Ví dụ, authorization xác định chính xác thông tin nào sinh viên được phép truy cập trên trang web của trường đại học sau khi authentication thành công.
-   ## Khai báo Authentication dùng JwtBearer
-   ## Cấu hình sinh Token
-   ## Demo gọi API sử dụng Authentication Header
-   ## Sử dụng Postman
-# Day 4 and Day 5: Secure API with Json Web Token (JWT) - Refresh Token
+   #### Khai báo Authentication dùng JwtBearer
+   #### Cấu hình sinh Token
+   #### Demo gọi API sử dụng Authentication Header
+   #### Sử dụng Postman
+#### Day 4 and Day 5: Secure API with Json Web Token (JWT) - Refresh Token
+#### Day 6: Filtering, Sorting, Paging in ASP.NET Core WebAPI
+#### Day 7: Bật CORS trong ASP.NET Core Web API
